@@ -52,6 +52,12 @@
       <p>Student Notes Sharing Pateform</p>
       <button type="submit" class="btn btn-primary">Uploade Notes</button>
       <button type="submit" class="btn btn-secondary">View Notes</button>
+      <br>
+      <br>
+      <form method = "GET">
+        <input type="text" name = "search" placeholder = "Search Notes" class = "form-control">
+        <button type ="submit" class = "btn btn-primary mt-2">Search</button>
+      </form>
       <h2>Available Notes</h2>
       {%for note in notes%}
       <div class="card note-card mb-3">

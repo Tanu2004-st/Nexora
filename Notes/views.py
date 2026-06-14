@@ -2,12 +2,21 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 from django.contrib.auth import logout
+from django.db.models import Q
 from.models import Note
 # from django.http import HttpResponse
 # Create your views here.
 def home(request):
-    notes = Note.objects.all()
+    search = request.GET.get('search')
+    print(search)
+    if search:
+            notes = Note.objects.filter(Q(title__icontains=search)|Q(subject__icontains=search)|Q(description__icontains =search))
+
+    else:
+          notes=Note.objects.all()
+
     return render(request,'home.html', {'notes': notes})
+
 def upload_note(request):
     if not request.user.is_authenticated:
         return redirect('/login/')
