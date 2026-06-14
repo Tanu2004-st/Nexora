@@ -9,11 +9,13 @@ def home(request):
     notes = Note.objects.all()
     return render(request,'home.html', {'notes': notes})
 def upload_note(request):
+    if not request.user.is_authenticated:
+        return redirect('/login/')
     if request.method == 'POST':
         title = request.POST['title']
         subject = request.POST['subject']
         description = request.POST['description']
-        author = request.POST['author']
+        author = request.user.username
         uploaded_file = request.FILES.get('file')
         Note.objects.create(title=title, subject = subject, description=description,author=author, file=uploaded_file)
         return redirect('/')
@@ -21,16 +23,19 @@ def upload_note(request):
 
 def delete_note(request, id):
     note = Note.objects.get(id = id)
-    note.delete()
+    if note.author == request.user.username:
+      note.delete()
     return redirect('/')
 
 def edit_note(request, id):
     note = Note.objects.get(id = id)
+    if note.author != request.user.username:
+            return redirect('/')
     if request.method == 'POST':
         note.title = request.POST['title']
         note.subject = request.POST['subject']
         note.description = request.POST['description']
-        note.author = request.POST['author']
+        
         if request.FILES.get('file'):
             note.file = request.FILES.get('file')
         note.save()

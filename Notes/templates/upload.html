@@ -23,21 +23,27 @@
                 <li class ="nav-item">
                   <a href="/" class= "nav-link">Home</a>
                 </li>
-                <li class ="nav-item">
+                  {%if request.user.is_authenticated %}
+                   <li class ="nav-item">
                   <a href="/upload/" class= "nav-link">Upload</a>
                 </li>
-                <li class ="nav-item">
+                  <li class ="nav-item">
+                    <a href="/logout/" class = "btn btn-danger">Logout</a>
+                  </li>
+                  {%else%}
+                  <li class ="nav-item">
                   <a href="/register/" class= "nav-link">Register</a>
                 </li>
                 <li class ="nav-item">
                   <a href="/login/" class= "nav-link">Login</a>
                 </li>
-
+                  
+                  {% endif %}
               </ul>
 
             </div>
             
-            <a href="/logout/" class = "btn btn-danger">Logout</a>
+            
         </div>
     </nav>
     <div class = "container mt-5">
@@ -54,9 +60,9 @@
         <label >Description</label>
         <textarea name="description" class = "form-control"></textarea>
         <br><br>
-        <label >Author</label>
+        {% comment %} <label >Author</label>
         <input type="text" name = "author">
-        <br><br>
+        <br><br> {% endcomment %}
         <label >PDF File</label>
         <input type="file" name = "file" class= "form-control">
         <br><br>

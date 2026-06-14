@@ -23,21 +23,27 @@
                 <li class ="nav-item">
                   <a href="/" class= "nav-link">Home</a>
                 </li>
-                <li class ="nav-item">
+                  {%if request.user.is_authenticated %}
+                   <li class ="nav-item">
                   <a href="/upload/" class= "nav-link">Upload</a>
                 </li>
-                <li class ="nav-item">
+                  <li class ="nav-item">
+                    <a href="/logout/" class = "btn btn-danger">Logout</a>
+                  </li>
+                  {%else%}
+                  <li class ="nav-item">
                   <a href="/register/" class= "nav-link">Register</a>
                 </li>
                 <li class ="nav-item">
                   <a href="/login/" class= "nav-link">Login</a>
                 </li>
-
+                  
+                  {% endif %}
               </ul>
 
             </div>
             
-            <a href="/logout/" class = "btn btn-danger">Logout</a>
+            
         </div>
     </nav>
     <div class="container mt-5">
@@ -60,8 +66,10 @@
           {% else %}
           <p>No PDF available</p>
           {% endif%}
+          {% if note.author == request.user.username %}
           <a href="/delete/{{note.id}}" class="btn btn-danger">Delete</a>
           <a href="/edit/{{note.id}}" class="btn btn-warning">Edit</a>
+          {% endif %}
         </div>
       </div>
 
