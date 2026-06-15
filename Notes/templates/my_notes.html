@@ -27,10 +27,9 @@
                    <li class ="nav-item">
                   <a href="/upload/" class= "nav-link">Upload</a>
                 </li>
-                <li class ="nav-item">
+                 <li class ="nav-item">
                   <a href="/my_notes/" class= "nav-link">My Notes</a>
                 </li>
-
                   <li class ="nav-item">
                     <a href="/logout/" class = "btn btn-danger">Logout</a>
                   </li>
@@ -51,18 +50,20 @@
         </div>
     </nav>
     <div class="container mt-5">
-      <h1 class = " main-heading text-center text-primary">Welcome to Nexora</h1>
+      {% comment %} <h1 class = " main-heading text-center text-primary">Welcome to Nexora</h1>
       <h2>created by Tarannum</h2>
       <p>Student Notes Sharing Pateform</p>
       <button type="submit" class="btn btn-primary">Uploade Notes</button>
       <button type="submit" class="btn btn-secondary">View Notes</button>
       <br>
-      <br>
+      <br> {% endcomment %}
+      <h1 class = " main-heading text-center text-primary">My Notes</h1>
+
       <form method = "GET">
         <input type="text" name = "search" placeholder = "Search Notes" class = "form-control">
         <button type ="submit" class = "btn btn-primary mt-2">Search</button>
       </form>
-      <h2>Available Notes</h2>
+      <br>
       {%for note in notes%}
       <div class="card note-card mb-3">
         <div class="card-body">

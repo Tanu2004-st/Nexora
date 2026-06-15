@@ -81,3 +81,9 @@ def logout_user(request):
     logout(request)
     return redirect('/login/')
 
+def my_notes(request):
+    notes = Note.objects.filter( author = request.user.username)
+
+    if not request.user.is_authenticated:
+        return redirect('/login/')
+    return render(request, 'my_notes.html', {'notes':notes})
