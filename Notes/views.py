@@ -7,6 +7,7 @@ from.models import Note
 # from django.http import HttpResponse
 # Create your views here.
 def home(request):
+     
     search = request.GET.get('search')
     print(search)
     if search:
@@ -14,8 +15,9 @@ def home(request):
 
     else:
           notes=Note.objects.all()
+          total_notes = notes.count()
 
-    return render(request,'home.html', {'notes': notes})
+    return render(request,'home.html', {'notes': notes, 'total_notes': total_notes})
 
 def upload_note(request):
     if not request.user.is_authenticated:
@@ -83,7 +85,12 @@ def logout_user(request):
 
 def my_notes(request):
     notes = Note.objects.filter( author = request.user.username)
+    my_notes_count = notes.count()
 
     if not request.user.is_authenticated:
         return redirect('/login/')
-    return render(request, 'my_notes.html', {'notes':notes})
+    return render(request, 'my_notes.html', {'notes':notes, 'my_notes_count': my_notes_count})
+
+def subject_notes(request, subject):
+    notes = Note.objects.filter(subject = subject)
+    return render(request, 'home.html', {'notes':notes})
