@@ -11,4 +11,5 @@ urlpatterns = [
     path('logout/',views.logout_user),
     path('my_notes/',views.my_notes),
     path('subject/<str:subject>/',views.subject_notes),
+    path('profile/', views.profile),
 ]

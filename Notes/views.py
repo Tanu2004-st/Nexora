@@ -94,3 +94,8 @@ def my_notes(request):
 def subject_notes(request, subject):
     notes = Note.objects.filter(subject = subject)
     return render(request, 'home.html', {'notes':notes})
+
+def profile(request):
+    total_notes = Note.objects.filter( author = request.user.username).count()
+
+    return render(request, 'profile.html', {'total_notes': total_notes})

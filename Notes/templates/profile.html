@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+ {% block content %}
+ <div class = "container mt-5">
+   <div class = "card p-4 shadow-sm col-md-6 mx-auto">
+   <h1 class = "text-primary mb-4">
+      <i class="bi bi-person-circle"></i> User Profile</h1>
+    <p><strong class = "text-primary">Username:</strong> {{ user.username }}</p>
+    <p><strong class = "text-primary">Email:</strong> {{ user.email }}</p>
+    <p><strong class = "text-primary">First Name:</strong> {{ user.first_name }}</p>
+    <p><strong class = "text-primary">Last Name:</strong> {{ user.last_name }}</p>
+    <p><strong class = "text-primary">Total Notes Uploaded : </strong><span class = "badge bg-primary">{{total_notes}}</span></p>
+   </div>
+   
+ </div>
+ {% endblock %}
