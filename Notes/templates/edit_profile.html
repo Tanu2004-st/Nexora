@@ -3,12 +3,21 @@
 
 <div class = "container mt-5">
     <h2>Edit Profile</h2>
-    <form method="POST">
+    <form method="POST" enctype ="multipart/form-data">
          {% csrf_token %}
          <input type = "text" name = "first_name" value ="{{user.first_name}}" class = "form-control mb-3">
          <input type = "text" name = "last_name" value ="{{user.last_name}}" class = "form-control mb-3">
          <input type = "text" name = "email" value ="{{user.email}}" class = "form-control mb-3">
-         <button type = "submit" class ="btn btn-primary">Save Button</button>
+         {% if profile.profile_pic %}
+         <div class = "text-center mb-3">
+            
+      <img src="{{profile.profile_pic.url}}" width = "120" height = "120" class = "rounded-circle mb-3">
+      </div>
+      {% endif %}
+         
+         <label class= "form-label">Profile Picture</label>
+         <input type="file" name = "profile_pic" class = "form-control mb-3">
+         <button type = "submit" class ="btn btn-primary">Save Changes</button>
 
     </form>
 </div>

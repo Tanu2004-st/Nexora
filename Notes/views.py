@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 from django.contrib.auth import logout
 from django.db.models import Q
-from.models import Note
+from.models import Note,Profile
 # from django.http import HttpResponse
 # Create your views here.
 def home(request):
@@ -96,11 +96,15 @@ def subject_notes(request, subject):
     return render(request, 'home.html', {'notes':notes})
 
 def profile(request):
+    profile,created = Profile.objects.get_or_create(user = request.user)
     total_notes = Note.objects.filter( author = request.user.username).count()
+    recent_notes = Note.objects.filter( author = request.user.username).order_by('-id')[:5]
 
-    return render(request, 'profile.html', {'total_notes': total_notes})
+    return render(request, 'profile.html', {'profile': profile, 'total_notes': total_notes,'recent_notes':recent_notes})
+
 
 def edit_profile(request):
+    profile,created = Profile.objects.get_or_create(user = request.user)
     if request.method == "POST":
        user = request.user
        user.first_name = request.POST['first_name']
@@ -108,6 +112,13 @@ def edit_profile(request):
        user.email = request.POST['email']
        user.save()
 
+       
+       profile_pic = request.FILES.get('profile_pic')
+
+       if profile_pic:
+            profile.profile_pic = profile_pic
+            profile.save()
+
        return redirect('/profile')
-    return render(request,'edit_profile.html')     
+    return render(request,'edit_profile.html',{'profile':profile})     
 
