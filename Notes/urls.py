@@ -11,5 +11,6 @@ urlpatterns = [
     path('logout/',views.logout_user),
     path('my_notes/',views.my_notes),
     path('subject/<str:subject>/',views.subject_notes),
-    path('profile/', views.profile),
+    path('profile/', views.profile, name = 'profile'),
+    path('edit_profile/', views.edit_profile, name = 'edit_profile'),
 ]

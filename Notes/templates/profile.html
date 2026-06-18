@@ -9,7 +9,8 @@
     <p><strong class = "text-primary">First Name:</strong> {{ user.first_name }}</p>
     <p><strong class = "text-primary">Last Name:</strong> {{ user.last_name }}</p>
     <p><strong class = "text-primary">Total Notes Uploaded : </strong><span class = "badge bg-primary">{{total_notes}}</span></p>
+    <a href="{% url 'edit_profile' %}" class="btn btn-primary ">Edit Profile</a>
    </div>
-   
+    
  </div>
  {% endblock %}

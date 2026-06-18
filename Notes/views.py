@@ -99,3 +99,15 @@ def profile(request):
     total_notes = Note.objects.filter( author = request.user.username).count()
 
     return render(request, 'profile.html', {'total_notes': total_notes})
+
+def edit_profile(request):
+    if request.method == "POST":
+       user = request.user
+       user.first_name = request.POST['first_name']
+       user.last_name = request.POST['last_name']
+       user.email = request.POST['email']
+       user.save()
+
+       return redirect('/profile')
+    return render(request,'edit_profile.html')     
+
